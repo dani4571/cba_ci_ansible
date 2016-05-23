@@ -1,0 +1,2 @@
+- file: path=/etc/foo.conf state=touch mode="u=rw,g=r,o=r"
+

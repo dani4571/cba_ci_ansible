@@ -1,0 +1,4 @@
+---
+- name: Copy Jenkins Job
+  copy: src=jenkins_jobs/ dest=/var/lib/jenkins/jobs/
+

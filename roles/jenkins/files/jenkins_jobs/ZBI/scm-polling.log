@@ -1,0 +1,13 @@
+Started on May 16, 2016 10:55:00 PM
+Using strategy: Default
+using .gitcredentials to set credentials
+ > git --version # timeout=10
+ > git init /tmp/hudson334984907795787694tmp # timeout=10
+ > git config --local credential.username zbi-mirror # timeout=10
+ > git config --local credential.helper store --file=/tmp/git5533097417199724061.credentials # timeout=10
+ > git -c core.askpass=true ls-remote -h https://github.com/cfarquhar/rpc-openstack # timeout=10
+ > git config --local --remove-section credential # timeout=10
+Found 24 remote heads on https://github.com/cfarquhar/rpc-openstack
+[poll] Latest remote head revision on refs/heads/liberty-12.0-cba is: 52d0de855a3de562d3ae2bbdab4fcb84600850c7
+Done. Took 1.3 sec
+Changes found

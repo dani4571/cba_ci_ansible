@@ -1,0 +1,11 @@
+---
+rpc_prep_ip: "10.240.0.10"
+rpc_prep_subnet: "10.240.0.0"
+rpc_prep_netmask: "255.255.252.0"
+rpc_prep_cidr: "{{ rpc_prep_ip }}/22"
+rpc_prep_gateway: "10.240.0.1"
+rpc_prep_dns_nameservers: "8.8.8.8"
+rpc_prep_boot_range: "10.240.1.10 10.240.1.254"
+br_host_ip: "10.240.0.143"
+bridge_ports: "eth1"
+dhcp_interfaces: "eth1"

@@ -1,0 +1,9 @@
+---
+
+- name: Intall repo for Debian
+  include: repo.debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Intall repo for RedHat
+  include: repo.redhat.yml
+  when: ansible_os_family == "RedHat"

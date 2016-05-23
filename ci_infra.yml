@@ -1,0 +1,89 @@
+- name: CI Infra
+  hosts: ci_infra
+  sudo: no
+  tasks:
+    - name: Install Debian dependencies
+      apt: name={{ item }} state=installed
+      with_items:
+        - vlan
+        - bridge-utils
+        - lxc
+
+#    - name: setup br device 
+#      script: scripts/append_br_interface.sh {{ br_host_ip }} {{ rpc_prep_netmask }} {{ rpc_prep_gateway }} {{ rpc_prep_dns_nameservers }} {{ bridge_ports }}
+
+#    - name: start br device
+#      command: ifup br-host
+
+    - name: get rpc prep lxc container
+      get_url: url=http://public.thornelabs.net/rpc-prep-lxc-container.tar.gz dest=/opt/rpc-prep-lxc-container.tar.gz
+
+    - name: get ubuntu image
+      get_url: url=http://releases.ubuntu.com/14.04.3/ubuntu-14.04.3-server-amd64.iso dest=/opt/ubuntu-14.04.3-server-amd64.iso
+
+    - name: mount iso
+      mount: name=/mnt src=/opt/ubuntu-14.04.3-server-amd64.iso
+
+#    - name: untar rpc prep container
+#      unarchive: src=/opt/rpc-prep-lxc-container.tar.gz dest=/var/lib/lxc/
+#
+#    - name: set container config
+#      lineinfile: dest=/var/lib/lxc/rpc-prep/config regexp="^lxc\.network\.ipv4" line="lxc.network.ipv4 ="{{ rpc_prep_subnet }}
+#
+#    - name: stop container
+#      command: lxc-stop -n rpc-prep
+#      ignore_errors: yes
+#
+#    - name: start container
+#      command: lxc-start -d --name rpc-prep
+#
+#    - name: Copy SSH key
+#      copy: src={{ ansible_ssh_public_key_file }} dest=/var/lib/lxc/rpc-prep/rootfs/root/.ssh/authorized_keys mode=0600
+#
+#    - name: Install base pkgs
+#      lxc_container:
+#        name: "rpc-prep"
+#        container_command: |
+#          apt-key update
+#          apt-get update
+#          apt-get upgrade -y >>/root/upgrade_output.log 2>>/root/upgrade_output.err
+#          apt-get install --force-yes -y wget openssh-server python python-dev host >>/root/install_output.log 2>>/root/install_output.err
+#      until:  lxc_output['lxc_container']['ips']
+#      register: lxc_output
+#
+#    - name: add new host
+#      add_host: ansible_ssh_host={{ lxc_output['lxc_container']['ips'][0] }} hostname=rpc-prep groups=cobbler
+
+
+
+#    - include: lxc_container_create.yml
+#      vars:
+#        name: jenkins1
+#        group: jenkins
+#    - include: lxc_container_create.yml
+#      vars:
+#        name: cobbler1
+#        group: cobbler
+
+
+#- name: Run Jenkins on Container
+#  hosts: jenkins
+#  roles: 
+#    - jenkins
+
+#- name: Run Cobbler on Container
+#  hosts: cobbler
+#  tasks: 
+#    - name: set next server in cobbler settings
+#      lineinefile: dest=/etc/cobbler/settings regexp='^next_server' line='next_server:'{{ rpc_prep_ip }}
+#
+#    - name: set server in cobbler settings
+#      lineinfile: dest=/etc/cobbler/settings regexp='^server' line='server:'{{ rpc_prep_ip }}
+#
+#    - name: dhcp interface
+#      lineinfile: dest=/etc/default/isc-dhcp-server regexp='^INTERFACES=' line="INTERFACES="{{ dhcp_interfaces }}
+#
+#    - name: dhcp config
+#      template: src=templates/cobbler_dhcp.j2 dest=/etc/cobbler/dhcp.template
+
+

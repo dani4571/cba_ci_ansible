@@ -1,0 +1,35 @@
+- name: Create New Container
+  lxc_container:
+    name: "{{ name }}"
+    container_log: true
+    template: ubuntu
+    state: started
+    template_options: --release trusty
+    container_command:
+      mkdir /root/.ssh
+    container_config:
+      - "lxc.group={{ group }}"
+  register: lxc_output
+
+- name: Copy SSH key
+  copy: src={{ ansible_ssh_public_key_file }} dest=/var/lib/lxc/{{ name }}/rootfs/root/.ssh/authorized_keys mode=0600
+
+- name: Wait for container IP
+  lxc_container:
+    name: "{{ name }}"
+  until:  lxc_output['lxc_container']['ips']
+  register: lxc_output
+
+- name: Install base pkg
+  lxc_container:
+    name: "{{ name }}"
+    container_command: |
+      apt-key update
+      apt-get update
+      apt-get upgrade -y >>/root/upgrade_output.log 2>>/root/upgrade_output.err
+      apt-get install --force-yes -y wget openssh-server python python-dev host >>/root/install_output.log 2>>/root/install_output.err
+  register: lxc_output
+
+- name: add new container as ansible host
+  add_host: ansible_ssh_host={{ lxc_output['lxc_container']['ips'][0] }} hostname={{ name }} groups={{ group }}
+

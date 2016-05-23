@@ -1,0 +1,36 @@
+---
+containers:
+  - name: jenkins-1
+    service: jenkins
+  - name: cobbler-1
+    service: cobbler
+plugins:
+  - 'ansicolor'
+  - 'buildgraph-view'
+  - 'build-flow-plugin'
+  - 'credentials-binding'
+  - 'dashboard-view'
+  - 'embeddable-build-status'
+  - 'github'
+  - 'github-api'
+  - 'jquery'
+  - 'multiple-scms'
+  - 'nested-view'
+  - 'nodelabelparameter'
+  - 'parameterized-trigger'
+  - 'plain-credentials'
+  - 'simple-theme-plugin'
+  - 'ssh-agent'
+  - 'swarm'
+  - 'throttle-concurrents'
+  - 'thinBackup'
+  - 'token-macro'
+  - 'violations'
+  - 'workflow-aggregator'
+  - 'ws-cleanup'
+port: 8080
+prefix: '/'
+email:
+  smtp_host: 'mail.example.com'
+  smtp_ssl: 'true'
+  default_email_suffix: '@example.com'
