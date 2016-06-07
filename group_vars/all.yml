@@ -1,11 +1,18 @@
 ---
-rpc_prep_ip: "10.240.0.10"
-rpc_prep_subnet: "10.240.0.0"
-rpc_prep_netmask: "255.255.252.0"
-rpc_prep_cidr: "{{ rpc_prep_ip }}/22"
-rpc_prep_gateway: "10.240.0.1"
-rpc_prep_dns_nameservers: "8.8.8.8"
-rpc_prep_boot_range: "10.240.1.10 10.240.1.254"
-br_host_ip: "10.240.0.143"
-bridge_ports: "eth1"
+http_proxy: http://10.33.33.40:3128
+https_proxy: http://10.33.33.40:3128
+
+host_iface: em2
+host_ip: 10.33.33.45
+ipmi_iface: em1
+ipmi_ip: 10.44.44.4
+container_host_ip: 10.33.33.4
+container_ipmi_ip: 10.44.44.4
+
+cobbler_subnet: 10.33.33.0
+cobbler_netmask: 255.255.255.0
+cobbler_gateway: 10.33.33.1
+cobbler_nameservers: 10.33.33.1
+
+cobbler_boot_range: "10.33.33.50 10.33.33.55"
 dhcp_interfaces: "eth1"

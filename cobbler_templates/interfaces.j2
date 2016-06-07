@@ -1,0 +1,37 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto {{ host_iface }}
+iface {{ host_iface}} inet manual
+
+# Container Bridge
+auto br-host
+iface br-host inet static
+    address {{ host_ip }}
+    netmask 255.255.255.0
+    gateway 10.33.33.1
+    dns-nameservers 10.33.33.1
+    dns-search net.zbi.cba
+    bridge_ports {{ host_iface }}
+    bridge_stp off
+    bridge_waitport 0
+    bridge_fd 0
+
+auto {{ ipmi_iface }}
+iface {{ ipmi_iface }} inet manual
+
+auto br-ipmi
+iface br-ipmi inet static
+    address {{ ipmi_ip }}
+    netmask 255.255.255.0
+    gateway 10.44.44.1
+    bridge_ports {{ ipmi_iface }}
+    bridge_stp off
+    bridge_waitport 0
+    bridge_fd 0

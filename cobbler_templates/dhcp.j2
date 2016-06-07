@@ -18,11 +18,11 @@ set vendorclass = option vendor-class-identifier;
 
 option pxe-system-type code 93 = unsigned integer 16;
 
-subnet {{ rpc_prep_subnet }} netmask {{ rpc_prep_netmask }} {
-     option routers             {{ rpc_prep_gateway }};
-     option domain-name-servers {{ rpc_prep_dns_nameservers }};
-     option subnet-mask         {{ rpc_prep_netmask }};
-     range dynamic-bootp        {{ rpc_prep_boot_range }};
+subnet {{ cobbler_subnet }} netmask {{ cobbler_netmask }} {
+     option routers             {{ cobbler_gateway }};
+     option domain-name-servers {{ cobbler_nameservers }};
+     option subnet-mask         {{ cobbler_netmask }};
+     range dynamic-bootp        {{ cobbler_boot_range }};
      default-lease-time         21600;
      max-lease-time             43200;
      next-server                $next_server;

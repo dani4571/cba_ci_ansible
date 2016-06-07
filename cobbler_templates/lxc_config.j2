@@ -1,0 +1,35 @@
+# Template used to create this container: /usr/share/lxc/templates/lxc-download
+# Parameters passed to the template: --dist ubuntu --release trusty --arch amd64
+# For additional config options, please look at lxc.container.conf(5)
+
+# Distribution configuration
+lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+lxc.arch = x86_64
+
+# Container specific configuration
+lxc.rootfs = /var/lib/lxc/rpc-prep/rootfs
+lxc.utsname = rpc-prep
+
+# Network configuration
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = lxcbr0
+lxc.network.hwaddr = 00:16:3e:78:85:c1
+
+lxc.network.type = veth
+lxc.network.name = eth1
+lxc.network.ipv4 = {{ container_host_ip }}/24
+lxc.network.link = br-host
+lxc.network.hwaddr = 00:16:3e:xx:xx:xx
+lxc.network.flags = up
+lxc.network.mtu = 1500
+
+lxc.network.type = veth
+lxc.network.name = eth2
+lxc.network.flags = up
+lxc.network.link = br-ipmi
+lxc.network.hwaddr = 00:16:3e:xx:xx:xx
+lxc.network.ipv4 = {{ container_ipmi_ip }}/24
+lxc.network.mtu = 1500
+
+
