@@ -12,6 +12,7 @@ container_ipmi_ip: 10.44.44.4
 cobbler_subnet: 10.33.33.0
 cobbler_netmask: 255.255.255.0
 cobbler_gateway: 10.33.33.1
+cobbler_ipmi_gateway: 10.44.44.1
 cobbler_nameservers: 10.33.33.1
 
 cobbler_boot_range: "10.33.33.50 10.33.33.55"
